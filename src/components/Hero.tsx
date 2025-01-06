@@ -31,10 +31,10 @@ export default function Hero() {
               <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
                 Buy Now
               </Button>
-              <Button size="lg" variant="outline" className="text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-white px-8 py-3 rounded-full font-semibold transition duration-300 ease-in-out transform hover:scale-105">
+              {/* <Button size="lg" variant="outline" className="text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-white px-8 py-3 rounded-full font-semibold transition duration-300 ease-in-out transform hover:scale-105">
                 Learn More
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              </Button> */}
             </div>
           </motion.div>
           <motion.div
