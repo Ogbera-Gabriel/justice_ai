@@ -50,12 +50,6 @@ export default function Tokenomics() {
           <p className="text-lg text-gray-300 mb-4">
             $JAI is the fuel that powers the Justice AI ecosystem, enabling a fair and transparent legal landscape.
           </p>
-          <a
-            href="#"
-            className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out transform hover:scale-105"
-          >
-            Learn More About $JAI
-          </a>
         </motion.div>
       </div>
     </section>
