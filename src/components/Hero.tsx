@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { ArrowRight, Scale, Shield, Zap } from 'lucide-react'
+import { Scale, Shield, Zap, ArrowRight } from 'lucide-react'
+
 
 export default function Hero() {
   return (
@@ -27,15 +28,14 @@ export default function Hero() {
             <p className="text-xl mb-8 text-gray-300 max-w-lg">
               Revolutionizing legal technology through AI and blockchain for unbiased, secure, and real-time legal guidance.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-full font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
-                Buy Now
-              </Button>
-              {/* <Button size="lg" variant="outline" className="text-purple-400 border-purple-400 hover:bg-purple-400 hover:text-white px-8 py-3 rounded-full font-semibold transition duration-300 ease-in-out transform hover:scale-105">
-                Learn More
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button> */}
-            </div>
+            <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
+            <Button 
+              size="lg" 
+              className="bg-purple-600 hover:bg-purple-700 text-white px-12 py-6 rounded-full text-xl font-semibold transition duration-300 ease-in-out transform hover:scale-105 shadow-lg"
+            >
+              Buy Now
+            </Button>
+            </a>
           </motion.div>
           <motion.div
             className="lg:w-1/2"
