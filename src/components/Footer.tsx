@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
-import { FaDiscord } from "react-icons/fa"
 import { FaSquareXTwitter } from "react-icons/fa6"
 import { FaTelegram } from "react-icons/fa"
 
@@ -30,14 +29,11 @@ export default function Footer() {
               <Button variant="outline" className="border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white">Contact</Button>
             </div>
             <div className="flex space-x-4">
-              <a href="https://t.me/JusticeAI" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
+              <a href="https://t.me/JusticeAIsolana" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-purple-400 transition-colors">
                 <FaTelegram size={24} />
               </a>
-              <a href="https://twitter.com/JusticeAI" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
+              <a href="https://x.com/JusticeAI_Sol" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors">
                 <FaSquareXTwitter size={24} />
-              </a>
-              <a href="https://discord.gg/JusticeAI" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
-                <FaDiscord size={24} />
               </a>
             </div>
           </motion.div>
