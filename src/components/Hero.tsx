@@ -89,7 +89,7 @@ export default function Hero() {
             <div className="relative w-full max-w-[500px] mx-auto">
               <div className="aspect-[1/1.2] w-full">
                 <Image
-                  src="/justiceAi.jpg"
+                  src="/justiceAi1.jpg"
                   alt="AI Justice Robot holding scales of justice"
                   fill
                   className="object-contain"
