@@ -25,8 +25,7 @@ export default function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="flex space-x-4">
-              <Button variant="outline" className="border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white">Whitepaper</Button>
+            <div className="flex space-x-4"> 
               <Button variant="outline" className="border-blue-500 text-blue-400 hover:bg-blue-500 hover:text-white">Community</Button>
               <Button variant="outline" className="border-pink-500 text-pink-400 hover:bg-pink-500 hover:text-white">Contact</Button>
             </div>
