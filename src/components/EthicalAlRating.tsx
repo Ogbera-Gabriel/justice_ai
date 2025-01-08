@@ -49,7 +49,7 @@ export default function EthicalAIRating() {
     setProjects(generateRandomProjects().slice(0, 5));
     const interval = setInterval(() => {
       setProjects(generateRandomProjects().slice(0, 5));
-    }, 10000);
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
