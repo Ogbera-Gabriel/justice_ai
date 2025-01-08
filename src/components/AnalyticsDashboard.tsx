@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -46,14 +46,12 @@ const AnalyticsDashboard = () => {
   const [riskData, setRiskData] = useState<unknown[]>([])
   const [fraudData, setFraudData] = useState<unknown[]>([])
   const [currentProjects, setCurrentProjects] = useState<string[]>([])
+  const [activeTab, setActiveTab] = useState('sentiment')
+
+  const tabs = useMemo(() => ['sentiment', 'risk', 'fraud'], []);
 
   useEffect(() => {
-    setSentimentData(generateRandomData())
-    setRiskData(generateRandomPieData())
-    setFraudData(generateRandomBarData())
-    setCurrentProjects(projectNames.slice(0, 5))
-
-    const interval = setInterval(() => {
+    const updateData = () => {
       setSentimentData(generateRandomData())
       setRiskData(generateRandomPieData())
       setFraudData(generateRandomBarData())
@@ -63,10 +61,22 @@ const AnalyticsDashboard = () => {
           .sort(() => 0.5 - Math.random())
           .slice(0, 5);
       })
-    }, 10000)
+    }
 
-    return () => clearInterval(interval)
-  }, [])
+    updateData()
+    const dataInterval = setInterval(updateData, 10000)
+
+    let tabIndex = 0
+    const tabInterval = setInterval(() => {
+      tabIndex = (tabIndex + 1) % tabs.length
+      setActiveTab(tabs[tabIndex])
+    }, 20000)
+
+    return () => {
+      clearInterval(dataInterval)
+      clearInterval(tabInterval)
+    }
+  }, [tabs])
 
   const COLORS = ['#36A2EB', '#FFCE56', '#FF6384']
 
@@ -81,7 +91,7 @@ const AnalyticsDashboard = () => {
           <h2 className="text-4xl font-bold mb-8 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
             AI-Powered Analytics Dashboard
           </h2>
-          
+
           {/* Current Projects Card */}
           <Card className="mb-8 bg-gray-800 bg-opacity-50 border-purple-500 border">
             <CardHeader>
@@ -107,7 +117,7 @@ const AnalyticsDashboard = () => {
           </Card>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-            <Tabs defaultValue="sentiment" className="w-full">
+            <Tabs value={activeTab} className="w-full">
               <TabsList className="grid w-full grid-cols-3 mb-8">
                 <TabsTrigger value="sentiment">Sentiment Analysis</TabsTrigger>
                 <TabsTrigger value="risk">Risk Detection</TabsTrigger>
@@ -120,7 +130,8 @@ const AnalyticsDashboard = () => {
                     <CardDescription className="text-gray-300">Track public sentiment towards legal decisions and policies</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <ResponsiveContainer width="100%" height={400}>
+                    {activeTab === 'sentiment' && (
+                    <ResponsiveContainer width="100%" height={400} key={activeTab}>
                       <LineChart data={sentimentData}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                         <XAxis dataKey="name" stroke="#888" />
@@ -131,6 +142,7 @@ const AnalyticsDashboard = () => {
                         <Line type="monotone" dataKey="Negative" stroke="#FF6384" />
                       </LineChart>
                     </ResponsiveContainer>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -141,7 +153,8 @@ const AnalyticsDashboard = () => {
                     <CardDescription className="text-gray-300">Analyze potential risks in legal processes</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <ResponsiveContainer width="100%" height={400}>
+                    {activeTab === 'risk' && (
+                    <ResponsiveContainer width="100%" height={400} key={activeTab}>
                       <PieChart>
                         <Pie
                           data={riskData}
@@ -160,6 +173,7 @@ const AnalyticsDashboard = () => {
                         <Tooltip contentStyle={{ backgroundColor: '#333', border: 'none' }} />
                       </PieChart>
                     </ResponsiveContainer>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
@@ -170,7 +184,8 @@ const AnalyticsDashboard = () => {
                     <CardDescription className="text-gray-300">Detect potential fraudulent activities in legal transactions</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <ResponsiveContainer width="100%" height={400}>
+                    {activeTab === 'fraud' && (
+                    <ResponsiveContainer width="100%" height={400} key={activeTab}>
                       <BarChart data={fraudData}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#444" />
                         <XAxis dataKey="name" stroke="#888" />
@@ -184,6 +199,7 @@ const AnalyticsDashboard = () => {
                         </Bar>
                       </BarChart>
                     </ResponsiveContainer>
+                    )}
                   </CardContent>
                 </Card>
               </TabsContent>
