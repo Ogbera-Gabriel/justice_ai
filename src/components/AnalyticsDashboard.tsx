@@ -1,13 +1,13 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { Button } from "@/components/ui/button"
 import { AlertTriangle, TrendingUp } from 'lucide-react'
-import EthicalAIRating from './EthicalAIRating'
+import EthicalAIRating from './EthicalAlRating'
 
 const generateRandomData = () => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
@@ -42,18 +42,22 @@ const projectNames = [
 ];
 
 const AnalyticsDashboard = () => {
-  const [activeTab, setActiveTab] = useState('sentiment')
-  const [sentimentData, setSentimentData] = useState(generateRandomData())
-  const [riskData, setRiskData] = useState(generateRandomPieData())
-  const [fraudData, setFraudData] = useState(generateRandomBarData())
-  const [currentProjects, setCurrentProjects] = useState(projectNames.slice(0, 5))
+  const [sentimentData, setSentimentData] = useState<unknown[]>([])
+  const [riskData, setRiskData] = useState<unknown[]>([])
+  const [fraudData, setFraudData] = useState<unknown[]>([])
+  const [currentProjects, setCurrentProjects] = useState<string[]>([])
 
   useEffect(() => {
+    setSentimentData(generateRandomData())
+    setRiskData(generateRandomPieData())
+    setFraudData(generateRandomBarData())
+    setCurrentProjects(projectNames.slice(0, 5))
+
     const interval = setInterval(() => {
       setSentimentData(generateRandomData())
       setRiskData(generateRandomPieData())
       setFraudData(generateRandomBarData())
-      setCurrentProjects(prevProjects => {
+      setCurrentProjects(() => {
         const newProjects = [...projectNames];
         return newProjects
           .sort(() => 0.5 - Math.random())
@@ -86,21 +90,18 @@ const AnalyticsDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <AnimatePresence>
-                  {currentProjects.map((project, index) => (
-                    <motion.div
-                      key={project}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.5 }}
-                      className="bg-gray-700 p-4 rounded-lg shadow-lg border border-purple-400"
-                    >
-                      <h3 className="text-lg font-semibold text-purple-300">{project}</h3>
-                      <p className="text-sm text-gray-400 mt-2">Status: Active</p>
-                    </motion.div>
-                  ))}
-                </AnimatePresence>
+                {currentProjects.map((project) => (
+                  <motion.div
+                    key={project}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-gray-700 p-4 rounded-lg shadow-lg border border-purple-400"
+                  >
+                    <h3 className="text-lg font-semibold text-purple-300">{project}</h3>
+                    <p className="text-sm text-gray-400 mt-2">Status: Active</p>
+                  </motion.div>
+                ))}
               </div>
             </CardContent>
           </Card>
@@ -108,9 +109,9 @@ const AnalyticsDashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <Tabs defaultValue="sentiment" className="w-full">
               <TabsList className="grid w-full grid-cols-3 mb-8">
-                <TabsTrigger value="sentiment" onClick={() => setActiveTab('sentiment')}>Sentiment Analysis</TabsTrigger>
-                <TabsTrigger value="risk" onClick={() => setActiveTab('risk')}>Risk Detection</TabsTrigger>
-                <TabsTrigger value="fraud" onClick={() => setActiveTab('fraud')}>Fraud Analysis</TabsTrigger>
+                <TabsTrigger value="sentiment">Sentiment Analysis</TabsTrigger>
+                <TabsTrigger value="risk">Risk Detection</TabsTrigger>
+                <TabsTrigger value="fraud">Fraud Analysis</TabsTrigger>
               </TabsList>
               <TabsContent value="sentiment">
                 <Card className="bg-gray-800 bg-opacity-50 border-purple-500 border">
