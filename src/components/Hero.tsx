@@ -10,7 +10,7 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <Image
-          src="/Designer.jpeg"
+          src="/JaiScale2.jpeg"
           alt="Bitcoin technology background"
           fill
           className="object-cover"
