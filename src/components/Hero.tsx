@@ -1,50 +1,68 @@
-'use client';
+'use client'
 
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import Image from 'next/image';
+import { motion } from "framer-motion"
+import Image from 'next/image'
+import DataFlowAnimation from './DataFlowAnimation'
 
 export default function Hero() {
   return (
-    <section className="min-h-screen relative overflow-hidden bg-gradient-to-b from-gray-900 via-purple-900/50 to-gray-900">
+    <section className="min-h-screen relative overflow-hidden">
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <motion.div
-          initial={{ opacity: 0.3 }}
-          animate={{
-            opacity: [0.3, 1, 0.3],
-            background: [
-              'linear-gradient(to bottom, rgb(17, 24, 39), rgba(147, 51, 234, 0.4), rgb(17, 24, 39))',
-              'linear-gradient(to bottom, rgb(17, 24, 39), rgba(147, 51, 234, 1), rgb(17, 24, 39))',
-              'linear-gradient(to bottom, rgb(17, 24, 39), rgba(147, 51, 234, 0.4), rgb(17, 24, 39))',
-            ],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-          className="absolute inset-0"
+        <Image
+          src="/Designer.jpeg"
+          alt="Bitcoin technology background"
+          fill
+          className="object-cover"
+          priority
         />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.3)_0%,transparent_70%)]" />
-        <div className="absolute inset-0 bg-[url('/placeholder.svg?height=100&width=100')] bg-repeat opacity-70" />
-
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-purple-900/50 to-gray-900/80" />
         <motion.div
-          initial={{ opacity: 0.2 }}
-          animate={{ opacity: [0.2, 0.8, 0.2] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.4)_0%,transparent_50%)] blur-2xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0.1, 0.3, 0.1] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(147,51,234,0.15)_0%,transparent_70%)]"
         />
+        <DataFlowAnimation />
       </div>
 
+      {/* Main Content */}
       <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 py-12 lg:py-20 min-h-screen">
+        <div className="flex flex-col items-center justify-center min-h-screen text-center">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="w-full lg:w-1/2 text-center lg:text-left"
+            className="max-w-4xl mx-auto"
           >
+            {/* AI Portrait */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative w-64 h-64 md:w-96 md:h-96 mx-auto mb-8"
+            >
+              <Image
+                src="/Designer__2_-removebg-preview.png"
+                alt="AI Justice Portrait"
+                fill
+                className="object-contain"
+                priority
+              />
+              <motion.div
+                animate={{ 
+                  boxShadow: [
+                    "0 0 20px rgba(147,51,234,0.3)",
+                    "0 0 40px rgba(147,51,234,0.2)",
+                    "0 0 20px rgba(147,51,234,0.3)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="absolute inset-0 rounded-full"
+              />
+            </motion.div>
+
+            {/* Text Content */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,60 +77,15 @@ export default function Hero() {
                   Empowering Legal Fairness
                 </span>
               </h1>
-              <p className="text-lg sm:text-xl mb-8 text-gray-300 max-w-lg mx-auto lg:mx-0">
-                Revolutionary AI-powered legal technology ensuring unbiased
-                justice through blockchain innovation.
+              <p className="text-lg sm:text-xl mb-8 text-gray-300 max-w-2xl mx-auto">
+                Revolutionary AI-powered legal technology ensuring unbiased justice through blockchain innovation.
               </p>
-              <Link
-                href="https://example.com/buy-jai"
-                passHref
-                legacyBehavior
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  size="lg"
-                  className="bg-purple-600 hover:bg-purple-700 text-white px-8 sm:px-10 py-4 sm:py-5 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(147,51,234,0.3)] hover:shadow-[0_0_30px_rgba(147,51,234,0.5)]"
-                >
-                  Buy Now
-                </Button>
-              </Link>
             </motion.div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            className="w-full lg:w-1/2"
-          >
-            <div className="relative w-full max-w-[500px] mx-auto">
-              <div className="aspect-[1/1.2] w-full">
-                <Image
-                  src="/justiceAi1.jpg"
-                  alt="AI Justice Robot holding scales of justice"
-                  fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 90vw, (max-width: 1200px) 45vw, 600px"
-                  priority
-                />
-              </div>
-              <motion.div
-                animate={{
-                  boxShadow: [
-                    '0 0 20px rgba(147,51,234,0.3)',
-                    '0 0 40px rgba(147,51,234,0.2)',
-                    '0 0 20px rgba(147,51,234,0.3)',
-                  ],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute inset-0 rounded-3xl"
-              />
-            </div>
           </motion.div>
         </div>
       </div>
 
+      {/* Animated Circuit Lines */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           initial={{ opacity: 0 }}
@@ -134,5 +107,6 @@ export default function Hero() {
         />
       </div>
     </section>
-  );
+  )
 }
+
