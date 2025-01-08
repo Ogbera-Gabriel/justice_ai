@@ -5,9 +5,8 @@ import { motion } from 'framer-motion'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Button } from "@/components/ui/button"
-import { AlertTriangle, TrendingUp } from 'lucide-react'
 import EthicalAIRating from './EthicalAlRating'
+import Image from 'next/image'
 
 const generateRandomData = () => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
@@ -64,13 +63,13 @@ const AnalyticsDashboard = () => {
     }
 
     updateData()
-    const dataInterval = setInterval(updateData, 10000)
+    const dataInterval = setInterval(updateData, 5000)
 
     let tabIndex = 0
     const tabInterval = setInterval(() => {
       tabIndex = (tabIndex + 1) % tabs.length
       setActiveTab(tabs[tabIndex])
-    }, 20000)
+    }, 10000)
 
     return () => {
       clearInterval(dataInterval)
@@ -81,8 +80,20 @@ const AnalyticsDashboard = () => {
   const COLORS = ['#36A2EB', '#FFCE56', '#FF6384']
 
   return (
-    <section className="py-16 bg-gradient-to-b from-gray-900 to-purple-900">
-      <div className="container mx-auto px-4">
+    <section className="py-16 relative overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/backgroundAi.png"
+          alt="AI Analysis Background"
+          fill
+          className="object-cover opacity-40"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900/80 via-purple-900/50 to-gray-900/80" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -93,7 +104,7 @@ const AnalyticsDashboard = () => {
           </h2>
 
           {/* Current Projects Card */}
-          <Card className="mb-8 bg-gray-800 bg-opacity-50 border-purple-500 border">
+          <Card className="mb-8 bg-gray-900/60 border-purple-500/50 backdrop-blur-sm">
             <CardHeader>
               <CardTitle className="text-2xl font-bold text-purple-400">Current Projects</CardTitle>
               <CardDescription className="text-gray-300">Projects currently being analyzed for ethical AI compliance</CardDescription>
@@ -106,7 +117,7 @@ const AnalyticsDashboard = () => {
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-gray-700 p-4 rounded-lg shadow-lg border border-purple-400"
+                    className="bg-gray-800/50 p-4 rounded-lg shadow-lg border border-purple-400/30 backdrop-blur-sm"
                   >
                     <h3 className="text-lg font-semibold text-purple-300">{project}</h3>
                     <p className="text-sm text-gray-400 mt-2">Status: Active</p>
@@ -118,101 +129,93 @@ const AnalyticsDashboard = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             <Tabs value={activeTab} className="w-full">
-              <TabsList className="grid w-full grid-cols-3 mb-8">
+              <TabsList className="grid w-full grid-cols-3 mb-8 bg-gray-900/60 backdrop-blur-sm">
                 <TabsTrigger value="sentiment">Sentiment Analysis</TabsTrigger>
                 <TabsTrigger value="risk">Risk Detection</TabsTrigger>
                 <TabsTrigger value="fraud">Fraud Analysis</TabsTrigger>
               </TabsList>
               <TabsContent value="sentiment">
-                <Card className="bg-gray-800 bg-opacity-50 border-purple-500 border">
+                <Card className="bg-gray-900/60 border-purple-500/50 backdrop-blur-sm">
                   <CardHeader>
                     <CardTitle className="text-purple-400">Sentiment Analysis</CardTitle>
                     <CardDescription className="text-gray-300">Track public sentiment towards legal decisions and policies</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
                     {activeTab === 'sentiment' && (
-                    <ResponsiveContainer width="100%" height={400} key={activeTab}>
-                      <LineChart data={sentimentData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                        <XAxis dataKey="name" stroke="#888" />
-                        <YAxis stroke="#888" />
-                        <Tooltip contentStyle={{ backgroundColor: '#333', border: 'none' }} />
-                        <Legend />
-                        <Line type="monotone" dataKey="Positive" stroke="#36A2EB" />
-                        <Line type="monotone" dataKey="Negative" stroke="#FF6384" />
-                      </LineChart>
-                    </ResponsiveContainer>
+                      <ResponsiveContainer width="100%" height={400} key={activeTab}>
+                        <LineChart data={sentimentData}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                          <XAxis dataKey="name" stroke="#888" />
+                          <YAxis stroke="#888" />
+                          <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none', backdropFilter: 'blur(12px)' }} />
+                          <Legend />
+                          <Line type="monotone" dataKey="Positive" stroke="#36A2EB" strokeWidth={2} />
+                          <Line type="monotone" dataKey="Negative" stroke="#FF6384" strokeWidth={2} />
+                        </LineChart>
+                      </ResponsiveContainer>
                     )}
                   </CardContent>
                 </Card>
               </TabsContent>
               <TabsContent value="risk">
-                <Card className="bg-gray-800 bg-opacity-50 border-purple-500 border">
+                <Card className="bg-gray-900/60 border-purple-500/50 backdrop-blur-sm">
                   <CardHeader>
                     <CardTitle className="text-purple-400">Risk Detection</CardTitle>
                     <CardDescription className="text-gray-300">Analyze potential risks in legal processes</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
                     {activeTab === 'risk' && (
-                    <ResponsiveContainer width="100%" height={400} key={activeTab}>
-                      <PieChart>
-                        <Pie
-                          data={riskData}
-                          cx="50%"
-                          cy="50%"
-                          labelLine={false}
-                          outerRadius={150}
-                          fill="#8884d8"
-                          dataKey="value"
-                          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        >
-                          {riskData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Pie>
-                        <Tooltip contentStyle={{ backgroundColor: '#333', border: 'none' }} />
-                      </PieChart>
-                    </ResponsiveContainer>
+                      <ResponsiveContainer width="100%" height={400} key={activeTab}>
+                        <PieChart>
+                          <Pie
+                            data={riskData}
+                            cx="50%"
+                            cy="50%"
+                            labelLine={false}
+                            outerRadius={150}
+                            fill="#8884d8"
+                            dataKey="value"
+                            label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                          >
+                            {riskData.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                          </Pie>
+                          <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none', backdropFilter: 'blur(12px)' }} />
+                        </PieChart>
+                      </ResponsiveContainer>
                     )}
                   </CardContent>
                 </Card>
               </TabsContent>
               <TabsContent value="fraud">
-                <Card className="bg-gray-800 bg-opacity-50 border-purple-500 border">
+                <Card className="bg-gray-900/60 border-purple-500/50 backdrop-blur-sm">
                   <CardHeader>
                     <CardTitle className="text-purple-400">Fraud Analysis</CardTitle>
                     <CardDescription className="text-gray-300">Detect potential fraudulent activities in legal transactions</CardDescription>
                   </CardHeader>
                   <CardContent className="pt-6">
                     {activeTab === 'fraud' && (
-                    <ResponsiveContainer width="100%" height={400} key={activeTab}>
-                      <BarChart data={fraudData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#444" />
-                        <XAxis dataKey="name" stroke="#888" />
-                        <YAxis stroke="#888" />
-                        <Tooltip contentStyle={{ backgroundColor: '#333', border: 'none' }} />
-                        <Legend />
-                        <Bar dataKey="value" fill="#8884d8">
-                          {fraudData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                          ))}
-                        </Bar>
-                      </BarChart>
-                    </ResponsiveContainer>
+                      <ResponsiveContainer width="100%" height={400} key={activeTab}>
+                        <BarChart data={fraudData}>
+                          <CartesianGrid strokeDasharray="3 3" stroke="#444" />
+                          <XAxis dataKey="name" stroke="#888" />
+                          <YAxis stroke="#888" />
+                          <Tooltip contentStyle={{ backgroundColor: '#1f2937', border: 'none', backdropFilter: 'blur(12px)' }} />
+                          <Legend />
+                          <Bar dataKey="value" fill="#8884d8">
+                            {fraudData.map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
                     )}
                   </CardContent>
                 </Card>
               </TabsContent>
             </Tabs>
             <EthicalAIRating />
-          </div>
-          <div className="flex justify-center">
-            <Button className="mr-4 bg-purple-600 hover:bg-purple-700" onClick={() => console.log('Generate report')}>
-              <TrendingUp className="mr-2 h-4 w-4" /> Generate Report
-            </Button>
-            <Button variant="outline" className="border-purple-500 text-purple-400 hover:bg-purple-700 hover:text-white" onClick={() => console.log('View alerts')}>
-              <AlertTriangle className="mr-2 h-4 w-4" /> View Alerts
-            </Button>
           </div>
         </motion.div>
       </div>
