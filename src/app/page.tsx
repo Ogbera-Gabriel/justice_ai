@@ -5,6 +5,7 @@ import Features from "@/components/Features";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import Roadmap from "@/components/Roadmap";
+import TokenChart from "@/components/TokenChart";
 import Tokenomics from "@/components/Tokenomics";
 
 
@@ -17,6 +18,7 @@ export default function Home() {
       <Features />
       <Tokenomics />
       <Roadmap />
+      <TokenChart />
       <Community />
       <Footer />
     </main>
