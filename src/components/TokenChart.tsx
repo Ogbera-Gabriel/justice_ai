@@ -131,8 +131,8 @@ export default function TokenChart() {
                           )}
                           {item.name === 'Marketing' && (
                             <p className="text-sm text-gray-400">
-                              Promotions, influencer partnerships, campaigns,
-                              and awareness drives. (50,000,000 tokens)
+                              Promotions, campaigns, and awareness drives.
+                              (50,000,000 tokens)
                             </p>
                           )}
                           {item.name === 'Partnership IBC Group' && (
@@ -143,8 +143,9 @@ export default function TokenChart() {
                           )}
                           {item.name === 'Charity and Community Rewards' && (
                             <p className="text-sm text-gray-400">
-                              Donations, used for community incentives and
-                              social impact initiatives. (40,000,000 tokens)
+                              Fight for justice, donations, used for community
+                              incentives and social impact initiatives.
+                              (40,000,000 tokens)
                             </p>
                           )}
                         </div>
