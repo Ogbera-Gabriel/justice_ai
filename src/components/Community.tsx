@@ -159,7 +159,7 @@ export default function Community() {
                       Join our Telegram community
                     </p>
                     <Link
-                      href="https://t.me/JusticeAIsolana"
+                      href="https://t.me/+q6w0XNukm8UzMWZk"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
