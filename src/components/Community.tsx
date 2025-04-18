@@ -191,7 +191,7 @@ export default function Community() {
                       Get started with Justice AI
                     </p>
                     <Link
-                      href="https://example.com/buy-jai"
+                      href="https://pump.fun/coin/bKphoUfpTd5AVqbfmv3wWUyneWL8ZdVAHthw388pump"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
