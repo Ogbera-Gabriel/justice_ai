@@ -191,7 +191,7 @@ export default function Community() {
                       Get started with Justice AI
                     </p>
                     <Link
-                      href="https://pump.fun/coin/bKphoUfpTd5AVqbfmv3wWUyneWL8ZdVAHthw388pump"
+                      href="https://dexscreener.com/solana/F6HNBJdauphe3uX1YhFaUKGyApe2ctKTEL5GpKD63wtP"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
